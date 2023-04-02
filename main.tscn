@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://gra4itco7m1f"]
+
+[ext_resource type="Script" path="res://Author.gd" id="1_c6lum"]
+[ext_resource type="Script" path="res://main.gd" id="1_prg3q"]
+[ext_resource type="Script" path="res://Book.gd" id="3_o22s3"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_prg3q")
+
+[node name="Author" type="Node" parent="."]
+script = ExtResource("1_c6lum")
+
+[node name="Book" type="Node" parent="."]
+script = ExtResource("3_o22s3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopMenu" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddBook" type="Button" parent="Panel/VBoxContainer/TopMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Book"
+
+[node name="AddAuthor" type="Button" parent="Panel/VBoxContainer/TopMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Author"
+
+[node name="SearchMenu" type="HBoxContainer" parent="Panel/VBoxContainer/TopMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/TopMenu/SearchMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Search by :"
+
+[node name="SearchBy" type="OptionButton" parent="Panel/VBoxContainer/TopMenu/SearchMenu"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Author"
+popup/item_0/id = 0
+popup/item_1/text = "Book's name"
+popup/item_1/id = 1
+popup/item_2/text = "ISBN"
+popup/item_2/id = 2
+
+[node name="DisplayContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+alignment = 1
+
+[connection signal="pressed" from="Panel/VBoxContainer/TopMenu/AddAuthor" to="." method="_on_add_author_pressed"]
+[connection signal="item_selected" from="Panel/VBoxContainer/TopMenu/SearchMenu/SearchBy" to="." method="_on_search_by_item_selected"]
