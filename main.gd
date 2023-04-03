@@ -44,11 +44,15 @@ func _on_search_by_item_selected(index):
 	var scroll_container = ScrollContainer.new()
 	scroll_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	var listing = VBoxContainer.new()
+	var listing = VBoxContainer.new() 
 	listing.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	listing.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var search_bar = LineEdit.new()
+	search_bar.connect("text_changed", func(text): search_bar_changed(text, listing))
+	display_container.add_child(search_bar)
 	display_container.add_child(scroll_container)
 	scroll_container.add_child(listing)
+	
 	match index:
 		0:
 			if updated == false:
@@ -60,7 +64,29 @@ func _on_search_by_item_selected(index):
 		2:
 			print("ttt")
 
-
+func search_bar_changed(text, listing):
+	var id_list = []
+	var elts = text.split(" ")
+	for elt in elts:
+		if elt != "":
+			for id in authors:
+				if elt in authors[id].first_name or elt in authors[id].last_name:
+					if id not in id_list:
+						id_list.append(id)
+				else:
+					if id in id_list:
+						id_list.erase(id)
+	delete_children(listing)
+	print(elts)
+	if len(elts) == 1:
+		if elts[0] == "":
+			for id in authors:
+				authors[id].display(listing)
+	for id in id_list:
+		authors[id].display(listing)
+		
+	
+	
 func _on_add_author_pressed():
 	if updated == false:
 		update()
@@ -97,6 +123,7 @@ func _on_add_author_pressed():
 func validate(entry1, entry2):
 	var aut = Author.new(len(authors), entry1.text, entry2.text)
 	authors[len(authors)] = (aut)
+	print(authors)
 	aut.save()
 	delete_children(display_container)
 
