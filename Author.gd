@@ -29,12 +29,13 @@ func save():
 	file.close()
 	
 
-func display(listing):
+func display(node, function):
 	var aut = Button.new()
+	aut.connect("pressed", function)
 	aut.text = first_name + " " + last_name
 	aut.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	aut.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	aut.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	listing.add_child(aut)
+	node.add_child(aut)
 	
 

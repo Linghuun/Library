@@ -1,10 +1,15 @@
 extends Node
 
-
-@onready var page = $"../Panel/VBoxContainer/DisplayContainer/ScrollContainer/Page"
-@onready var display_container = $"../Panel/VBoxContainer/DisplayContainer"
-@onready var scroll_container = $"../Panel/VBoxContainer/DisplayContainer/ScrollContainer"
+const Author = preload("res://Author.gd")
 @onready var main = $".."
+@onready var authors = main.authors
+
+@export var id_book: int
+@export var book_name: String
+@export var ISBN: int
+@export var author: Author
+@export var date: String
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -13,22 +18,31 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-
-func display():
-	var file = FileAccess.open("res://Book.txt", FileAccess.READ_WRITE)
-	var title_box = HBoxContainer.new()
-	var image_lab = main.create_something("Image", Label)
-	title_box.add_child(image_lab)
-	var name_lab = main.create_something("Book's Name", Label)
-	title_box.add_child(name_lab)
-	var Author = main.create_something("Author", Label)
-	title_box.add_child(Author)
-	var ISBN = main.create_something("ISBN", Label)
-	title_box.add_child(ISBN)
 	
-	display_container.add_child(title_box)
-	display_container.move_child(title_box, 0)
+func _init(id_book, id_author, name, ISBN, date):
+	self.id_book = id_book
+	self.id_author = id_author
+	self.book_name = name
+	self.ISBN = ISBN
+	self.date = date
+
+func display(listing):
+	var book = HBoxContainer.new()
+	var ISBN_lab = Label.new()
+	ISBN_lab.text = self.ISBN
+	var book_name_lab = Label.new()
+	book_name_lab.text = self.book_name
+	var date_lab = Label.new()
+	date_lab.text = self.date
+	var author_but = Button.new()
+	author_but.text = main.authors[self.id_author]
 	
-	while not file.eof_reached():
-		var line = file.get_line()
+	book.add_child(ISBN_lab)
+	book.add_child(book_name_lab)
+	book.add_child(date_lab)
+	book.add_child(author_but)
+	book.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	book.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	
+	listing.add_child(book)
+
