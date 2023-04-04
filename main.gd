@@ -4,7 +4,7 @@ const Author = preload("res://Author.gd")
 const Book = preload("res://Book.gd")
 
 
-@onready var top_menu = $Panel/VBoxContainer/TopMenu
+@onready var top_menu =  $Panel/VBoxContainer/TopMenu
 @onready var search_by = $Panel/VBoxContainer/TopMenu/SearchMenu/SearchBy
 
 @onready var search_menu = $Panel/VBoxContainer/SearchMenu
@@ -15,15 +15,13 @@ const Book = preload("res://Book.gd")
 
 @onready var add_book_menu = $Panel/VBoxContainer/AddBookMenu
 @onready var listing2 =      $Panel/VBoxContainer/AddBookMenu/SearchMenu/ScrollContainer/Listing2
-@onready var search_bar2 =    $Panel/VBoxContainer/AddBookMenu/SearchMenu/SearchBar2
+@onready var search_bar2 =   $Panel/VBoxContainer/AddBookMenu/SearchMenu/SearchBar2
 
 
 @onready var authors = {}
 @onready var aut_updated = false
 @onready var book_updated = false
 
- 
-	
 func update_aut():
 	var file = FileAccess.open("res://Author.txt", FileAccess.READ)
 	while not file.eof_reached():
@@ -38,7 +36,6 @@ func update_aut():
 func update_book():
 	pass
 
-	
 func display_authors(node, function):
 	if aut_updated == false:
 		update_aut()
@@ -63,13 +60,11 @@ func _on_search_by_item_selected(index):
 		2:
 			print("ttt")
 
-
 func validate_aut(entry1, entry2):
 	if not "/" in entry1.text and not "/" in entry2.text:
 		var aut = Author.new(len(authors), entry1.text, entry2.text)
 		authors[len(authors)] = (aut)
 		aut.save()
-
 
 func delete_children(node):
 	for child in node.get_children():
@@ -101,16 +96,18 @@ func validate_book(grid_container):
 
 
 func _on_search_bar_text_changed(text):
+	var index = search_by.selected
 	var node: Node
 	if add_book_menu.visible == true:
 		node = listing2
 	else:
 		node = listing
 	delete_children(node)
-	for id in authors:
-		var name_lastname = authors[id].first_name + authors[id].last_name
-		var lastname_name = authors[id].last_name + authors[id].first_name
-		if text.similarity(name_lastname) > 0.2 or text.similarity(lastname_name) > 0.2 or text in lastname_name:
-			authors[id].display(node, temp)
-	if text == "":
-		display_authors(node, temp)
+	if node == listing2 or index == 0: 
+		for id in authors:
+			var name_lastname = authors[id].first_name + authors[id].last_name
+			var lastname_name = authors[id].last_name + authors[id].first_name
+			if text.similarity(name_lastname) > 0.3 or text.similarity(lastname_name) > 0.3 or text in lastname_name:
+				authors[id].display(node, temp)
+		if text == "":
+			display_authors(node, temp)

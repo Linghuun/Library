@@ -76,35 +76,57 @@ popup/item_1/id = 1
 popup/item_2/text = "ISBN"
 popup/item_2/id = 2
 
-[node name="AddAuthorMenu" type="VBoxContainer" parent="Panel/VBoxContainer"]
-visible = false
+[node name="AddAuthorMenu" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="HBoxFirstName" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu"]
 layout_mode = 2
 
-[node name="LabFirstName" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxFirstName"]
+[node name="HBoxFirstName" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabFirstName" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/HBoxFirstName"]
 layout_mode = 2
 text = "First name"
 
-[node name="EntryLastName" type="LineEdit" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxFirstName"]
+[node name="EntryLastName" type="LineEdit" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/HBoxFirstName"]
 layout_mode = 2
 
-[node name="HBoxLastName" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu"]
+[node name="HBoxLastName" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer"]
 layout_mode = 2
 
-[node name="LabLastName" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxLastName"]
+[node name="LabLastName" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/HBoxLastName"]
 layout_mode = 2
 text = "Last name"
 
-[node name="EntryLastName" type="LineEdit" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxLastName"]
+[node name="EntryLastName" type="LineEdit" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/HBoxLastName"]
 layout_mode = 2
 
-[node name="ValidateAut" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu"]
+[node name="ValidateAut" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer"]
 layout_mode = 2
 text = "Validate"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer"]
+layout_mode = 2
+text = "already exist.
+Do you want
+to continue ?"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Yes"
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "No"
 
 [node name="SearchMenu" type="VBoxContainer" parent="Panel/VBoxContainer"]
 visible = false

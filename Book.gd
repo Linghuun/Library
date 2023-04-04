@@ -5,6 +5,7 @@ const Author = preload("res://Author.gd")
 @onready var authors = main.authors
 
 @export var id_book: int
+@export var id_author: int
 @export var book_name: String
 @export var ISBN: int
 @export var author: Author
