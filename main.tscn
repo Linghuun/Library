@@ -77,6 +77,7 @@ popup/item_2/text = "ISBN"
 popup/item_2/id = 2
 
 [node name="AddAuthorMenu" type="HBoxContainer" parent="Panel/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -91,7 +92,7 @@ layout_mode = 2
 layout_mode = 2
 text = "First name"
 
-[node name="EntryLastName" type="LineEdit" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/HBoxFirstName"]
+[node name="EntryFirstName" type="LineEdit" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/HBoxFirstName"]
 layout_mode = 2
 
 [node name="HBoxLastName" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer"]
@@ -108,24 +109,33 @@ layout_mode = 2
 layout_mode = 2
 text = "Validate"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu"]
+[node name="VerificationBox" type="HBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu"]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer"]
+[node name="VerificationLab" type="Label" parent="Panel/VBoxContainer/AddAuthorMenu/VerificationBox"]
 layout_mode = 2
-text = "already exist.
+size_flags_horizontal = 6
+size_flags_vertical = 1
+text = " already exist.
 Do you want
 to continue ?"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/AddAuthorMenu/VerificationBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer/VBoxContainer"]
+[node name="YesVerifAut" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/VerificationBox/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Yes"
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/HBoxContainer/VBoxContainer"]
+[node name="NoVerifAut" type="Button" parent="Panel/VBoxContainer/AddAuthorMenu/VerificationBox/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "No"
 
 [node name="SearchMenu" type="VBoxContainer" parent="Panel/VBoxContainer"]
@@ -230,5 +240,8 @@ size_flags_vertical = 3
 [connection signal="pressed" from="Panel/VBoxContainer/TopMenu/AddBook" to="." method="_on_add_book_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/TopMenu/AddAuthor" to="." method="_on_add_author_pressed"]
 [connection signal="item_selected" from="Panel/VBoxContainer/TopMenu/SearchMenu/SearchBy" to="." method="_on_search_by_item_selected"]
+[connection signal="pressed" from="Panel/VBoxContainer/AddAuthorMenu/VBoxContainer/ValidateAut" to="." method="_on_validate_aut_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/AddAuthorMenu/VerificationBox/VBoxContainer/YesVerifAut" to="." method="_on_yes_verif_aut_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/AddAuthorMenu/VerificationBox/VBoxContainer/NoVerifAut" to="." method="_on_no_verif_aut_pressed"]
 [connection signal="text_changed" from="Panel/VBoxContainer/SearchMenu/SearchBar" to="." method="_on_search_bar_text_changed"]
 [connection signal="text_changed" from="Panel/VBoxContainer/AddBookMenu/SearchMenu/SearchBar2" to="." method="_on_search_bar_text_changed"]
