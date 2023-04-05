@@ -6,5 +6,8 @@ Library (le nom est temporaire) est un projet que j'ai commencé assez récemmen
 
 Le code est sûrment encore flou et tout ne fonctionne pas entièrement car je suis encore entrain de l'améliorer, mais je pense qu'il est assez représentatif de mon niveau en programmation jusqu'à maintenant.
 
+L'application consiste en la constitution d'une bibliothèque personnelle sur laquelle on peut enregistrer des livres et leur auteur.
+On pourra peut être un jour directement y ajouter nos ebooks achetés et les y lire avec un système de notes, marque-pages, etc. Mais ce n'est pas encore le cas pour le moment.
+
 En vous souhaitant un bon visionnage,
 Adam.
